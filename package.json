@@ -1,0 +1,22 @@
+{
+  "name": "webgame",
+  "version": "1.0.0",
+  "description": "A simple webgame in plain html, js and css.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "keywords": [],
+  "author": "Mephisto5558",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@mephisto5558/eslint-config": "^3.1.0",
+    "globals": "^15.14.0",
+    "sweetalert2": "^11.15.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Mephisto5558/Webgame"
+  }
+}
