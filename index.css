@@ -1,0 +1,116 @@
+/* #region page */
+:root {
+  --background-color: #5c5c5c;
+  --background-color-brighter: #636363;
+  
+  --foreground-color: white;
+}
+
+* {
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  background-color: var(--background-color);
+}
+
+header {
+  flex: 0 1 auto;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+/* footer {
+  flex: 0 1 40px;
+} */
+
+.swal2-popup,
+.swal2-title {
+  color: var(--foreground-color) !important;
+}
+
+/* #endregion page */
+
+
+/* #region elementwide */
+button {
+  cursor: pointer;
+  user-select: none;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+button:hover {
+  filter: brightness(85%);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* #endregion elementwide */
+
+/* #region general classes */
+
+
+/* #endregion general classes */
+
+/* #region main counter */
+#the-button {
+  background-color: rgb(67, 67, 196);
+}
+
+#count-container > #count-msg {
+  user-select: none;
+}
+
+#count-container > #count-msg > span {
+  font-weight: bold;
+}
+/* #endregion main counter */
+
+/* #region shop */
+#shop {
+  background-color: var(--background-color-brighter);
+  border: black solid 1px;
+  border-radius: 5px;
+  padding: 0.5rem;
+  height: fit-content;
+}
+
+#shop:not(:has(#shop-items > button.unlocked)) {
+  display: none;
+}
+
+#shop > h1 {
+  margin-top: 0;
+}
+
+#shop > #shop-items > button:not(.unlocked) {
+  display: none;
+}
+
+#shop > #shop-items > button:not(.affordable) {
+  filter: brightness(50%);
+  cursor: not-allowed;
+}
+#shop > #shop-items > button:not(.affordable):active {
+  pointer-events: none;
+}
+
+#shop > #shop-items > button {
+  background-color: green;
+}
+
+/* #endregion shop */

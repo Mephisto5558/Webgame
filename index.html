@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel='stylesheet' href='index.css' crossorigin='anonymous' />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.min.css'
+    crossorigin='anonymous' />
+  <script src='https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js' crossorigin='anonymous' async></script>
+</head>
+
+<body>
+  <header>
+    <div id='shop'>
+      <h1>Shop</h1>
+      <div id='shop-items' onclick='buyUpgrade(event)'
+        onmouseover='event.target.title = `Currently level ${shopItems[event.target.id]?.level}`'>
+        <button id='clickPerClick'>+1 click per click</button>
+        <button id='autoClick'>+0.5 clicks per second</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <button id='the-button' class='centered' onclick='count(event)'>
+      Click me!
+    </button>
+    <div id='count-container' class='centered'>
+      <p id='count-msg'>You have clicked <span title='Real: 0'>0</span> times :O</p>
+    </div>
+    <script src='index.js' crossorigin='anonymous'></script>
+  </main>
+</body>
+
+</html>
