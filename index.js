@@ -68,7 +68,7 @@ function buyUpgrade(event) {
 
   const cost = shopItems[event.target.id].getCost(event.target);
   if (cost > clickCount)
-    return Swal.fire('Not enough clicks', `You cannot afford this. It costs ${cost}, you only have ${clickCount}.`, 'error');
+    return void Swal.fire('Not enough clicks', `You cannot afford this. It costs ${cost}, you only have ${clickCount}.`, 'error');
 
   shopItems[event.target.id].run?.();
   shopItems[event.target.id].level++;
