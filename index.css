@@ -24,12 +24,16 @@ header {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
 }
 
-/* footer {
+footer {
   flex: 0 1 40px;
-} */
+}
 
 .swal2-popup,
 .swal2-title {
@@ -46,18 +50,16 @@ button {
   border: 0;
   border-radius: 5px;
   padding: 5px 10px;
+
+  &:hover {
+    filter: brightness(85%)
+  }
 }
 
-button:hover {
-  filter: brightness(85%);
+span {
+  font-weight: bold;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 /* #endregion elementwide */
 
 /* #region general classes */
@@ -77,12 +79,10 @@ main {
   user-select: none;
 }
 
-#count-container > * > span {
-  font-weight: bold;
-}
 /* #endregion main counter */
 
 /* #region shop */
+/* #region general */
 #shop {
   display: flex;
   justify-content: space-between;
@@ -90,80 +90,85 @@ main {
   border: black solid 1px;
   border-radius: 5px;
   gap: 1rem;
+
+  &:not(:has(#shop-items > ul > li > button.unlocked)) {
+    display: none;
+  }
+
+  & > * {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    & > h1 {
+      margin-top: 0;
+    }
+
+    & > ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      & > li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.5rem 0;
+      }
+    }
+  }
 }
 
-#shop:not(:has(#shop-items > ul > li > button.unlocked)) {
-  display: none;
-}
-
-#shop > * > h1 {
-  margin-top: 0;
-}
-
-#shop > * > ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#shop > * > ul > li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.5rem 0;
-}
-
-#level-overview,
-#shop-items {
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
+/* #endregion general */
 
 /* #region shop items */
 #shop-items {
   border-right: 1px solid black;
 }
 
-#shop-items > ul > li > button:not(.unlocked) {
-  display: none;
-}
-
-#shop-items > ul > li > button:not(.affordable) {
-  filter: brightness(50%);
-  cursor: not-allowed;
-}
-
-#shop-items > ul > li > button:not(.affordable):active {
-  pointer-events: none;
-}
-
 #shop-items > ul > li > button {
   background-color: green;
+
+  &:not(.unlocked) {
+    display: none;
+  }
+
+  &:not(.affordable) {
+    filter: brightness(50%);
+    cursor: not-allowed;
+
+    &:active {
+      pointer-events: none;
+    }
+  }
 }
+
 /* #endregion shop items */
 
 /* #region shop levels */
 #level-overview {
   border-left: 1px solid black;
+
+  &:not(:has(ul > li > span:not(:empty))) {
+    display: none;
+  }
+
+  & > h1 {
+    text-align: right;
+  }
+
+  & > ul > li {
+    &:has(span:empty) {
+      display: none;
+    }
+
+    & > span {
+      text-align: right;
+      min-width: 2rem;
+    }
+  }
 }
 
-#level-overview:not(:has(ul > li > span:not(:empty))) {
-  display: none;
-}
-
-#level-overview > h1 {
-  text-align: right;
-}
-
-#level-overview > ul > li:has(span:empty) {
-  display: none;
-}
-
-#level-overview > ul > li > span {
-  text-align: right;
-  min-width: 2rem;
-}
 /* #endregion shop levels */
 /* #endregion shop */
