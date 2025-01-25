@@ -59,14 +59,16 @@ const baseShopItem = {
   ...v
 }]));
 
-let clickCountThisSec = 0;
 setInterval(() => {
   const clicks = shopItems.autoClick.level * 0.5;
   if (clicks) clickCount += clicks;
+}, 1000);
 
-  const cps = clickCountThisSec + clicks;
+let oldClickCount = clickCount;
+setInterval(() => {
+  const cps = clickCount - oldClickCount;
   if (cpsCount.textContent != cps) cpsCount.textContent = cps;
-  clickCountThisSec = 0;
+  oldClickCount = clickCount;
 }, 1000);
 
 function modifyCounter() {
@@ -94,7 +96,6 @@ function refreshShopUseabilities() {
 function count() {
   const clicks = shopItems.clickPerClick.getIncrease();
   clickCount += clicks;
-  clickCountThisSec += clicks;
 
   currentCount.title = `${currentCount.title.split(' ').slice(0, -1).join(' ')} ${Number.parseInt(currentCount.title.split(' ').at(-1)) + 1}`;
 
