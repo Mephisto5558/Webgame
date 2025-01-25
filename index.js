@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 // #region elements
@@ -5,8 +6,14 @@ const
   /** @type {countContainer} */countContainer = document.querySelector('#count-container'),
   /** @type {currentCount} */currentCount = countContainer.querySelector('#count-msg > span'),
   /** @type {cpsCount} */cpsCount = countContainer.querySelector('#cps-count-msg > span'),
-  /** @type {shop} */shop = document.querySelector('#shop');
+  /** @type {shop} */shop = document.querySelector('#shop'),
+  /** @type {shopLevelContainer} */shopLevelContainer = shop.querySelectorAll('#level-overview > ul > li > span');
 // #endregion elements
+
+Object.defineProperty(NodeList.prototype, 'namedItem', {
+  /* eslint-disable-next-line unicorn/no-null -- same as HTMLCollection#namedItem*/
+  value: function (name) { return [...this].find(e => e.id == name || e.name == name) ?? null; }
+});
 
 // #region util funcs
 /** @type {isButton}*/const isButton = element => element?.nodeName == 'BUTTON';
@@ -21,20 +28,36 @@ Object.defineProperty(globalThis, 'clickCount', {
   }
 });
 
-/** @type {shopItems} */const shopItems = {
+const baseShopItem = {
+  /** @type {(item: ShopOptions) => never} */
+  getCost: item => shopItems[item].unlockCost * (shopItems[item].level + 1),
+
+  /** @type {(item: ShopOptions) => never} */
+  getIncrease: item => 1 + shopItems[item].level,
+
+  addLevel: item => {
+    shopItems[item].level++;
+
+    const shopLevelItem = shopLevelContainer.namedItem(`level-${item}`);
+    shopLevelItem.textContent = (Number.parseInt(shopLevelItem.textContent) + 1) || 1;
+  }
+};
+
+/** @type {shopItems} */const shopItems = Object.fromEntries(Object.entries({
   clickPerClick: {
     unlockCost: 50,
-    level: 0,
-    getCost: () => shopItems.clickPerClick.unlockCost * (shopItems.clickPerClick.level + 1),
-    getIncrease: () => 1 + shopItems.clickPerClick.level
+    level: 0
   },
   autoClick: {
     unlockCost: 100,
-    level: 0,
-    getCost: () => shopItems.autoClick.unlockCost * (shopItems.autoClick.level + 1),
-    getIncrease: () => 0.5 * shopItems.autoClick.level
+    level: 0
   }
-};
+}).map(([k, v]) => [k, {
+  getCost: v.getCost ?? baseShopItem.getCost.bind(undefined, k),
+  getIncrease: v.getIncrease ?? baseShopItem.getIncrease.bind(undefined, k),
+  addLevel: v.addLevel ?? baseShopItem.addLevel.bind(undefined, k),
+  ...v
+}]));
 
 let clickCountThisSec = 0;
 setInterval(() => {
@@ -53,8 +76,9 @@ function modifyCounter() {
   currentCount.style.color = `hsl(${((clickCount / 250_000) * 240) + 240}, 100%, 50%)`;
 }
 
+const shopButtons = shop.querySelectorAll('#shop-items > ul > li > button');
 function refreshShopUseabilities() {
-  for (const shopButton of shop.children.namedItem('shop-items').childNodes) {
+  for (const shopButton of shopButtons) {
     if (!isButton(shopButton)) continue;
     if (!shopButton.classList.contains('unlocked')) {
       if (shopItems[shopButton.id].unlockCost / 2 <= clickCount) shopButton.classList.add('unlocked');
@@ -86,9 +110,9 @@ function buyUpgrade(event) {
   if (cost > clickCount)
     return void Swal.fire('Not enough clicks', `You cannot afford this. It costs ${cost}, you only have ${clickCount}.`, 'error');
 
-  shopItems[event.target.id].run?.();
-  shopItems[event.target.id].level++;
   clickCount -= cost;
+  shopItems[event.target.id].run?.();
+  shopItems[event.target.id].addLevel();
 
   modifyCounter();
   refreshShopUseabilities();

@@ -2,7 +2,7 @@
 :root {
   --background-color: #5c5c5c;
   --background-color-brighter: #636363;
-  
+
   --foreground-color: white;
 }
 
@@ -58,7 +58,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-
 /* #endregion elementwide */
 
 /* #region general classes */
@@ -72,9 +71,9 @@ main {
 }
 
 #count-container {
-	width: 100%;
-	align-content: center;
-	text-align: center;
+  width: 100%;
+  align-content: center;
+  text-align: center;
   user-select: none;
 }
 
@@ -85,35 +84,86 @@ main {
 
 /* #region shop */
 #shop {
+  display: flex;
+  justify-content: space-between;
   background-color: var(--background-color-brighter);
   border: black solid 1px;
   border-radius: 5px;
-  padding: 0.5rem;
-  height: fit-content;
+  gap: 1rem;
 }
 
-#shop:not(:has(#shop-items > button.unlocked)) {
+#shop:not(:has(#shop-items > ul > li > button.unlocked)) {
   display: none;
 }
 
-#shop > h1 {
+#shop > * > h1 {
   margin-top: 0;
 }
 
-#shop > #shop-items > button:not(.unlocked) {
+#shop > * > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#shop > * > ul > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+#level-overview,
+#shop-items {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* #region shop items */
+#shop-items {
+  border-right: 1px solid black;
+}
+
+#shop-items > ul > li > button:not(.unlocked) {
   display: none;
 }
 
-#shop > #shop-items > button:not(.affordable) {
+#shop-items > ul > li > button:not(.affordable) {
   filter: brightness(50%);
   cursor: not-allowed;
 }
-#shop > #shop-items > button:not(.affordable):active {
+
+#shop-items > ul > li > button:not(.affordable):active {
   pointer-events: none;
 }
 
-#shop > #shop-items > button {
+#shop-items > ul > li > button {
   background-color: green;
 }
+/* #endregion shop items */
 
+/* #region shop levels */
+#level-overview {
+  border-left: 1px solid black;
+}
+
+#level-overview:not(:has(ul > li > span:not(:empty))) {
+  display: none;
+}
+
+#level-overview > h1 {
+  text-align: right;
+}
+
+#level-overview > ul > li:has(span:empty) {
+  display: none;
+}
+
+#level-overview > ul > li > span {
+  text-align: right;
+  min-width: 2rem;
+}
+/* #endregion shop levels */
 /* #endregion shop */

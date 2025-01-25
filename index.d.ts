@@ -4,12 +4,17 @@ declare global {
   // @ts-expect-error must be done this way to work
   const Swal = Sweetalert2;
 
+  interface NodeList {
+    namedItem: HTMLCollection['namedItem'];
+  }
+
   type ShopOptions = 'clickPerClick' | 'autoClick';
 
   type countContainer = HTMLDivElement;
   type currentCount = HTMLSpanElement;
   type cpsCount = HTMLSpanElement;
   type shop = HTMLDivElement;
+  type shopLevelContainer = NodeListOf<HTMLSpanElement & { id: `level-${ShopOptions}` }>;
 
   let clickCount: number;
   type shopItems = Record<ShopOptions, {
@@ -17,6 +22,7 @@ declare global {
     level: number;
     getCost(): number;
     getIncrease(): number;
+    addLevel(): void;
   }>;
 
   type isButton = (element?: Element) => element is HTMLButtonElement;

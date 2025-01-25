@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-  <meta charset="utf-8">
+  <meta charset='utf-8'>
   <title>Webgame by Mephisto5558</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel='icon' type='image/x-icon' href='favicon.ico'>
   <link rel='stylesheet' href='index.css' crossorigin='anonymous' />
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.min.css'
     crossorigin='anonymous' />
@@ -14,11 +14,22 @@
 <body>
   <header>
     <div id='shop'>
-      <h1>Shop</h1>
-      <div id='shop-items' onclick='buyUpgrade(event)'
-        onmouseover='event.target.title = `Currently level ${shopItems[event.target.id]?.level}`'>
-        <button id='clickPerClick'>+1 click per click</button>
-        <button id='autoClick'>+0.5 clicks per second</button>
+      <!-- shop items -->
+      <div id='shop-items' onclick='buyUpgrade(event)'>
+        <h1>Shop</h1>
+        <ul>
+          <li><button id='clickPerClick'>+1 click per click</button></li>
+          <li><button id='autoClick'>+0.5 clicks per second</button></li>
+        </ul>
+      </div>
+
+      <!-- level overview -->
+      <div id='level-overview'>
+        <h1>Levels</h1>
+        <ul>
+          <li id='clickPerClick'>Click per click: <span id='level-clickPerClick'></span></li>
+          <li id='autoClick'>Clicks per second: <span id='level-autoClick'></span></li>
+        </ul>
       </div>
     </div>
   </header>
