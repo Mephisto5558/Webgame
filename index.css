@@ -71,11 +71,14 @@ main {
   background-color: rgb(67, 67, 196);
 }
 
-#count-container > #count-msg {
+#count-container {
+	width: 100%;
+	align-content: center;
+	text-align: center;
   user-select: none;
 }
 
-#count-container > #count-msg > span {
+#count-container > * > span {
   font-weight: bold;
 }
 /* #endregion main counter */
