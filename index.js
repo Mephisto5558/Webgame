@@ -45,17 +45,16 @@ const baseShopItem = {
 
 /** @type {shopItems} */const shopItems = Object.fromEntries(Object.entries({
   clickPerClick: {
-    unlockCost: 50,
-    level: 0
+    unlockCost: 50
   },
   autoClick: {
-    unlockCost: 100,
-    level: 0
+    unlockCost: 100
   }
 }).map(([k, v]) => [k, {
   getCost: v.getCost ?? baseShopItem.getCost.bind(undefined, k),
   getIncrease: v.getIncrease ?? baseShopItem.getIncrease.bind(undefined, k),
   addLevel: v.addLevel ?? baseShopItem.addLevel.bind(undefined, k),
+  level: v.level ?? 0,
   ...v
 }]));
 
@@ -75,7 +74,8 @@ function modifyCounter() {
   const newFontSize = (1 + Math.min(clickCount / 1000, clickCount ^ 0.5) / (10_000 + Math.max(clickCount ^ 0.5, 1))).toFixed(5);
   if (currentCount.style.fontSize.split('rem')[0] != newFontSize) currentCount.style.fontSize = `${newFontSize}rem`;
 
-  currentCount.style.color = `hsl(${((clickCount / 250_000) * 240) + 240}, 100%, 50%)`;
+  const newColor = `hsl(${Math.round((clickCount / 250_000) * 240 + 240)}, 100%, 50%)`;
+  if (currentCount.style.color != newColor) currentCount.style.color = newColor;
 }
 
 const shopButtons = shop.querySelectorAll('#shop-items > ul > li > button');
