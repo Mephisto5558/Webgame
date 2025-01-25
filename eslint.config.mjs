@@ -14,7 +14,8 @@ export default [
         ...globals.es2024,
         ...globals.browser,
         Swal: 'readable',
-        clickCount: 'writeable'
+        clickCount: 'writeable',
+        ShopOptions: 'readonly'
       }
     },
     rules: {
