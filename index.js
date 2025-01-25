@@ -68,8 +68,9 @@ function refreshShopUseabilities() {
 }
 
 function count() {
-  clickCount += shopItems.clickPerClick.getIncrease();
-  clickCountThisSec++;
+  const clicks = shopItems.clickPerClick.getIncrease();
+  clickCount += clicks;
+  clickCountThisSec += clicks;
 
   currentCount.title = `${currentCount.title.split(' ').slice(0, -1).join(' ')} ${Number.parseInt(currentCount.title.split(' ').at(-1)) + 1}`;
 
