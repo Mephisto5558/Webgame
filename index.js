@@ -1,54 +1,59 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 // #region elements
-/** @type {HTMLDivElement} */
-const countContainer = document.querySelector('#count-container');
-
-/** @type {HTMLSpanElement} */
-const currentCount = countContainer.querySelector('#count-msg > span');
-
-/** @type {HTMLDivElement} */
-const shop = document.querySelector('#shop');
-
+const
+  /** @type {countContainer} */countContainer = document.querySelector('#count-container'),
+  /** @type {currentCount} */currentCount = countContainer.querySelector('#count-msg > span'),
+  /** @type {cpsCount} */cpsCount = countContainer.querySelector('#cps-count-msg > span'),
+  /** @type {shop} */shop = document.querySelector('#shop');
 // #endregion elements
 
 // #region util funcs
-/**
- * @param {Element | undefined} element
- * @returns {element is HTMLButtonElement}*/
-const isButton = element => element?.nodeName == 'BUTTON';
-
+/** @type {isButton}*/const isButton = element => element?.nodeName == 'BUTTON';
 // #endregion util funcs
 
+let __internalClickCount = 0;
 Object.defineProperty(globalThis, 'clickCount', {
-  get() { return Number.parseInt(currentCount.textContent); },
-  set(val) { currentCount.textContent = val; }
+  get() { return __internalClickCount; },
+  set(val) {
+    __internalClickCount = val;
+    currentCount.textContent = val;
+  }
 });
 
-/** @type {Record<string, {unlockCost: number, level: number, getCost: () => number, run?: () => never}>} */
-const shopItems = {
+/** @type {shopItems} */const shopItems = {
   clickPerClick: {
     unlockCost: 50,
     level: 0,
-    getCost: () => shopItems.clickPerClick.unlockCost * (shopItems.clickPerClick.level + 1)
+    getCost: () => shopItems.clickPerClick.unlockCost * (shopItems.clickPerClick.level + 1),
+    getIncrease: () => 1 + shopItems.clickPerClick.level
   },
   autoClick: {
     unlockCost: 100,
     level: 0,
-    getCost: () => shopItems.autoClick.unlockCost * (shopItems.autoClick.level + 1)
+    getCost: () => shopItems.autoClick.unlockCost * (shopItems.autoClick.level + 1),
+    getIncrease: () => 0.5 * shopItems.autoClick.level
   }
 };
 
-function count() {
-  clickCount += 1 + shopItems.clickPerClick.level;
+let clickCountThisSec = 0;
+setInterval(() => {
+  const clicks = shopItems.autoClick.level * 0.5;
+  if (clicks) clickCount += clicks;
 
-  currentCount.title = `${currentCount.title.split(' ').slice(0, -1).join(' ')} ${Number.parseInt(currentCount.title.split(' ').at(-1)) + 1}`;
+  const cps = clickCountThisSec + clicks;
+  if (cpsCount.textContent != cps) cpsCount.textContent = cps;
+  clickCountThisSec = 0;
+}, 1000);
 
+function modifyCounter() {
   const newFontSize = (1 + Math.min(clickCount / 1000, clickCount ^ 0.5) / (10_000 + Math.max(clickCount ^ 0.5, 1))).toFixed(5);
   if (currentCount.style.fontSize.split('rem')[0] != newFontSize) currentCount.style.fontSize = `${newFontSize}rem`;
 
   currentCount.style.color = `hsl(${((clickCount / 250_000) * 240) + 240}, 100%, 50%)`;
+}
 
+function refreshShopUseabilities() {
   for (const shopButton of shop.children.namedItem('shop-items').childNodes) {
     if (!isButton(shopButton)) continue;
     if (!shopButton.classList.contains('unlocked')) {
@@ -62,7 +67,17 @@ function count() {
   }
 }
 
-/** @param {MouseEvent}event */
+function count() {
+  clickCount += shopItems.clickPerClick.getIncrease();
+  clickCountThisSec++;
+
+  currentCount.title = `${currentCount.title.split(' ').slice(0, -1).join(' ')} ${Number.parseInt(currentCount.title.split(' ').at(-1)) + 1}`;
+
+  modifyCounter();
+  refreshShopUseabilities();
+}
+
+/** @type {import('.').functs['buyUpgrade']} */
 function buyUpgrade(event) {
   if (!isButton(event.target)) return;
 
@@ -73,4 +88,7 @@ function buyUpgrade(event) {
   shopItems[event.target.id].run?.();
   shopItems[event.target.id].level++;
   clickCount -= cost;
+
+  modifyCounter();
+  refreshShopUseabilities();
 }
