@@ -79,6 +79,26 @@ function modifyCounter() {
 }
 
 const shopButtons = shop.querySelectorAll('#shop-items > ul > li > button');
+
+const div = document.createElement('div');
+div.classList.add('hover-info-container');
+div.innerHTML = "<p id='hover-info'>Cost: <span id='cost'></span><br>Clicks: <span id='clicks'></span></p>";
+
+for (const shopButton of shopButtons) {
+  if (!isButton(shopButton)) continue;
+
+  const hoverDiv = div.cloneNode(true);
+  const costElem = hoverDiv.children.namedItem('hover-info').children.namedItem('cost');
+  const clicksElem = hoverDiv.children.namedItem('hover-info').children.namedItem('clicks');
+
+  shopButton.addEventListener('mouseenter', () => {
+    if (costElem.textContent != shopItems[shopButton.id].getCost()) costElem.textContent = shopItems[shopButton.id].getCost();
+    if (clicksElem.textContent != shopItems[shopButton.id].getIncrease()) clicksElem.textContent = shopItems[shopButton.id].getIncrease();
+  });
+
+  shopButton.append(hoverDiv);
+}
+
 function refreshShopUseabilities() {
   for (const shopButton of shopButtons) {
     if (!isButton(shopButton)) continue;
@@ -108,8 +128,7 @@ function buyUpgrade(event) {
   if (!isButton(event.target)) return;
 
   const cost = shopItems[event.target.id].getCost(event.target);
-  if (cost > clickCount)
-    return void Swal.fire('Not enough clicks', `You cannot afford this. It costs ${cost}, you only have ${clickCount}.`, 'error');
+  if (cost > clickCount) return;
 
   clickCount -= cost;
   shopItems[event.target.id].run?.();

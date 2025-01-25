@@ -133,13 +133,36 @@ span {
   &:not(.unlocked) {
     display: none;
   }
-
+  
   &:not(.affordable) {
-    filter: brightness(50%);
     cursor: not-allowed;
+    background-color: #004b00;
+    filter: none;
+  }
 
-    &:active {
-      pointer-events: none;
+  &:hover .hover-info-container {
+    display: block;
+  }
+
+  & > .hover-info-container {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 75%);
+    border-radius: 5px;
+    padding: 2px;
+    z-index: 1;
+    transform: translate(220%, -100%);
+
+    & > p {
+      color: var(--foreground-color);
+      font-size: 0.75rem;
+      margin: 0;
+
+      & > span {
+        text-align: right;
+        font-size: inherit;
+        float: right;
+      }
     }
   }
 }
