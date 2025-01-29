@@ -1,5 +1,5 @@
 /** @type {import('.')['count']} */
-export function count() {
+globalThis.count = function count() {
   const clicks = shopItems.clickPerClick.calc.getIncrease();
   clickCount += clicks;
-}
+};
