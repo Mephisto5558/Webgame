@@ -93,7 +93,6 @@ export class BaseShopItem {
   toJSON() {
     return {
       id: this.id,
-      name: this.name,
       level: this.level
     };
   }
