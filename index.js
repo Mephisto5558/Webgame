@@ -69,6 +69,7 @@ setInterval(() => {
   if (cpsCount.textContent != cps) cpsCount.textContent = cps;
   oldClickCount = clickCount;
 }, 1000);
+setInterval(saveGame, 60_000);
 
 function modifyCounter() {
   const newFontSize = (1 + Math.min(clickCount / 1000, clickCount ^ 0.5) / (10_000 + Math.max(clickCount ^ 0.5, 1))).toFixed(5);
@@ -137,3 +138,21 @@ function buyUpgrade(event) {
   modifyCounter();
   refreshShopUseabilities();
 }
+
+function saveGame() {
+  globalThis.localStorage.setItem('saveState', btoa(JSON.stringify({ shopItems, clickCount })));
+}
+
+function loadGame() {
+  const save = atob(globalThis.localStorage.getItem('saveState') ?? '');
+  if (!save) return;
+
+  const data = JSON.parse(save);
+  ({ clickCount } = data);
+
+  for (const [k, v] of Object.entries(data.shopItems)) shopItems[k] = { ...shopItems[k], ...v };
+}
+loadGame();
+
+// #region Listeners
+window.addEventListener('beforeunload', saveGame);
