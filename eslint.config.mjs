@@ -15,11 +15,13 @@ export default [
         ...globals.browser,
         Swal: 'readable',
         clickCount: 'writeable',
-        ShopOptions: 'readonly'
+        stats: 'readonly',
+        shopItems: 'readonly'
       }
     },
     rules: {
-      '@typescript-eslint/no-unused-vars': 'off'
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-magic-numbers': 'off'
     }
   }
 ];

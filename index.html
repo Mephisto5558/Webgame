@@ -17,19 +17,13 @@
       <!-- shop items -->
       <div id='shop-items' onclick='buyUpgrade(event)'>
         <h1>Shop</h1>
-        <ul>
-          <li><button id='clickPerClick'>+1 click per click</button></li>
-          <li><button id='autoClick'>+0.5 clicks per second</button></li>
-        </ul>
+        <ul></ul>
       </div>
 
       <!-- level overview -->
       <div id='level-overview'>
         <h1>Levels</h1>
-        <ul>
-          <li id='clickPerClick'>Click per click: <span id='level-clickPerClick'></span></li>
-          <li id='autoClick'>Clicks per second: <span id='level-autoClick'></span></li>
-        </ul>
+        <ul></ul>
       </div>
     </div>
   </header>
@@ -41,7 +35,7 @@
       <p id='count-msg'>You have clicked <span title='Real: 0'>0</span> times :O</p>
       <p id='cps-count-msg'>CPS: <span id='cps-count'>0</span></p>
     </div>
-    <script src='js/index.js' crossorigin='anonymous'></script>
+    <script src='js/index.js' type='module' crossorigin='anonymous'></script>
   </main>
 </body>
 
