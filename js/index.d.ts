@@ -14,6 +14,7 @@ declare global {
   type countContainer = HTMLDivElement;
   type cpsCountSpan = HTMLSpanElement;
   type shop = HTMLDivElement;
+  type statsListElem = HTMLUListElement;
 
   let clickCount: number;
 }

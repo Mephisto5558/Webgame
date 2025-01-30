@@ -1,7 +1,7 @@
 /* #region page */
 :root {
   --background-color: #5c5c5c;
-  --background-color-brighter: #636363;
+  --background-color-secondary: #636363;
 
   --foreground-color: white;
 }
@@ -17,9 +17,14 @@ body {
   display: flex;
   flex-flow: column;
   background-color: var(--background-color);
+  margin: 0;
 }
 
 header {
+  flex: 0 1 auto;
+}
+
+#shop {
   flex: 0 1 auto;
 }
 
@@ -60,12 +65,61 @@ span {
   font-weight: bold;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 /* #endregion elementwide */
 
 /* #region general classes */
 
 
 /* #endregion general classes */
+
+/* #region header */
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--background-color-secondary);
+  border-bottom: black solid 1px;
+  gap: 1rem;
+  margin: 0 0 0.5rem 0;
+  padding: 0.25rem 0.5rem 0 0;
+
+  & * {
+    font-size: small;
+  }
+
+  & button {
+    padding: 2.5px 5px;
+    background-color: var(--background-color);
+    font-size: smaller;
+  }
+
+  & > #stats-container {
+    margin-left: auto;
+
+    & > #stats-list {
+      display: none;
+      position: absolute;
+      background-color: color-mix(in srgb, var(--background-color) 80%, transparent);
+      padding: 0 .25rem;
+      border-radius: 5px;
+      top: 1.5rem;
+      right: 0;
+
+      & > li > span {
+        float: right;
+        text-align: right;
+        padding-left: .25rem;
+      }
+    }
+  }
+}
+
+/* #endregion header */
 
 /* #region main counter */
 #the-button {
@@ -86,7 +140,7 @@ span {
 #shop {
   display: flex;
   justify-content: space-between;
-  background-color: var(--background-color-brighter);
+  background-color: var(--background-color-secondary);
   border: black solid 1px;
   border-radius: 5px;
   gap: 1rem;
@@ -105,17 +159,11 @@ span {
       margin-top: 0;
     }
 
-    & > ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      & > li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0.5rem 0;
-      }
+    & > ul > li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.5rem 0;
     }
   }
 }
@@ -133,7 +181,7 @@ span {
   &:not(.unlocked) {
     display: none;
   }
-  
+
   &:not(.affordable) {
     cursor: not-allowed;
     background-color: #004b00;

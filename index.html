@@ -13,20 +13,26 @@
 
 <body>
   <header>
-    <div id='shop'>
-      <!-- shop items -->
-      <div id='shop-items' onclick='buyUpgrade(event)'>
-        <h1>Shop</h1>
-        <ul></ul>
-      </div>
-
-      <!-- level overview -->
-      <div id='level-overview'>
-        <h1>Levels</h1>
-        <ul></ul>
-      </div>
+    <div id='stats-container'>
+      <button id='stats-button' onclick='showStats(this, event)'>Stats</button>
+      <ul id='stats-list'></ul>
     </div>
   </header>
+
+  <!-- shop-->
+  <div id='shop'>
+    <!-- shop items -->
+    <div id='shop-items' onclick='buyUpgrade(event)'>
+      <h1>Shop</h1>
+      <ul></ul>
+    </div>
+
+    <!-- level overview -->
+    <div id='level-overview'>
+      <h1>Levels</h1>
+      <ul></ul>
+    </div>
+  </div>
   <main>
     <button id='the-button' onclick='count(event)'>
       Click me!

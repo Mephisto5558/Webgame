@@ -7,7 +7,8 @@ export const
   /** @type {countContainer} */countContainer = document.querySelector('#count-container'),
   /** @type {cpsCountSpan} */cpsCountSpan = countContainer.querySelector('#cps-count-msg > span'),
   /** @type {shop} */shop = document.querySelector('#shop'),
-  /** @type {NodeListOf<import('./shop').ShopItem['levelOverviewSpan']>} */shopLevelContainer = shop.querySelectorAll('#level-overview > ul > li > span');
+  /** @type {NodeListOf<import('./shop').ShopItem['levelOverviewSpan']>} */shopLevelContainer = shop.querySelectorAll('#level-overview > ul > li > span'),
+  /** @type {statsListElem}*/ statsListElem = document.querySelector('header > #stats-container > #stats-list');
 
 
 /** @type {HTMLSpanElement} */ const currentCount = countContainer.querySelector('#count-msg > span');
