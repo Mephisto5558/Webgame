@@ -1,5 +1,5 @@
 import './stats/index.js';
-import { saveGame, loadGame } from './utils/index.js';
+import { saveGame, loadGame, isButton } from './utils/index.js';
 
 /* eslint-disable sonarjs/no-wildcard-import */
 import * as shop from './shop/index.js'; // Required for a global variable
@@ -9,9 +9,11 @@ import * as utils from './utils/index.js';
 /* eslint-enable sonarjs/no-wildcard-import */
 
 if (new URLSearchParams(globalThis.location.search).has('dev')) {
-  for (const file of [buttonEvents, intervals, shop, utils])
+  for (const file of [intervals, shop, utils])
     for (const [k, v] of Object.entries(file)) globalThis[k] = v;
 }
+
+for (const [k, v] of Object.entries(buttonEvents)) globalThis[k] = v;
 
 loadGame();
 window.addEventListener('beforeunload', () => {
@@ -21,7 +23,7 @@ window.addEventListener('beforeunload', () => {
 const maxKeyPerSec = 90;
 let lastKeyEvent = 0;
 globalThis.addEventListener('keydown', e => {
-  if (e.key != 'Enter' || e.target?.nodeName != 'BUTTON') return;
+  if (e.key != 'Enter' || !isButton(e.target)) return;
 
   const now = Date.now();
   if (now - lastKeyEvent <= maxKeyPerSec) return e.preventDefault();

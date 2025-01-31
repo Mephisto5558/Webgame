@@ -22,15 +22,25 @@ export function loadGame(save = atob(globalThis.localStorage.getItem('saveState'
   }
 }
 
-export function deleteSave() {
+export async function deleteSave() {
+  const swalRes = await Swal.fire({
+    title: 'Are you sure you want to do that?',
+    html: '<p>This action is irreversible.<br>Consider exporting your save first.<br><br><em style="font-size: .75rem; color: grey">The site will reload after your save has been deleted.</em></p>',
+    icon: 'warning',
+    showCancelButton: true,
+    focusCancel: true
+  });
+
+  if (!swalRes.isConfirmed) return;
+
   globalThis.localStorage.removeItem('saveState');
   globalThis.noSaveOnExit = true;
 
   globalThis.location.reload();
 }
 
-export async function importSave() {
-  await Swal.fire('User interaction required', 'Click ok to open the file selector', 'info');
+export async function importSave(event) {
+  if (!event) await Swal.fire('User interaction required', 'Click ok to open the file selector', 'info');
   createElement('input', { type: 'file', accept: '.save', onchange: async e => {
     try { loadGame(atob(await e.target.files[0].text())); }
     catch (err) {

@@ -3,19 +3,41 @@
 
 <head>
   <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta name='description' content='A simple idle clicker.' />
   <title>Webgame by Mephisto5558</title>
   <link rel='icon' type='image/x-icon' href='favicon.ico'>
   <link rel='stylesheet' href='css/index.css' crossorigin='anonymous' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css'
+    crossorigin='anonymous' />
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.min.css'
     crossorigin='anonymous' />
   <script src='https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js' crossorigin='anonymous' async></script>
 </head>
 
 <body>
-  <header>
+  <header onclick='displayHeaderList(event)'>
     <div id='stats-container'>
-      <button id='stats-button' onclick='showStats(this, event)'>Stats</button>
+      <button id='stats-button'>Stats</button>
       <ul id='stats-list'></ul>
+    </div>
+    <div id='options-container'>
+      <button id='options-button'><i class="fa-solid fa-bars"></i></button>
+      <div id='options-list'>
+        <details id='saving'>
+          <summary>Saving</summary>
+          <ul>
+            <li><button id='saveGame' title='Automatic saving is done every 60s and when closing the site.'
+              onclick='saveGame(event)'>Manual save</button></li>
+            <li><button id='importSave' title='Import an earlier exported save.'
+              onclick='importSave(event)'>Import save</button></li>
+            <li><button id='exportSave' title='Downloads the savefile on your machine.'
+              onclick='exportSave(event)'>Export save</button></li>
+            <li><button id='deleteSave' title='Irreversible. Everything will be gone.'
+              onclick='deleteSave(event)'>Delete save</button></li>
+          </ul>
+        </details>
+      </div>
     </div>
   </header>
 

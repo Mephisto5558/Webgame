@@ -43,6 +43,7 @@ footer {
 .swal2-popup,
 .swal2-title {
   color: var(--foreground-color) !important;
+  text-align: center
 }
 
 /* #endregion page */
@@ -58,6 +59,10 @@ button {
 
   &:hover {
     filter: brightness(85%)
+  }
+
+  & > i {
+    pointer-events: none;
   }
 }
 
@@ -84,7 +89,7 @@ header {
   justify-content: space-between;
   background-color: var(--background-color-secondary);
   border-bottom: black solid 1px;
-  gap: 1rem;
+  gap: .5rem;
   margin: 0 0 0.5rem 0;
   padding: 0.25rem 0.5rem 0 0;
 
@@ -98,24 +103,40 @@ header {
     font-size: smaller;
   }
 
-  & > #stats-container {
+  & > :first-child {
     margin-left: auto;
+  }
 
-    & > #stats-list {
-      display: none;
-      position: absolute;
-      background-color: color-mix(in srgb, var(--background-color) 80%, transparent);
-      padding: 0 .25rem;
-      border-radius: 5px;
-      top: 1.5rem;
-      right: 0;
+  & > div[id$='container'] > [id$='list'] {
+    display: none;
+    position: absolute;
+    background-color: color-mix(in srgb, var(--background-color) 80%, transparent);
+    padding: 0 .25rem;
+    border-radius: 5px;
+    top: 1.5rem;
+    right: 0;
 
-      & > li > #count-span {
-        float: right;
-        text-align: right;
-        padding-left: .25rem;
+    & button {
+      background-color: var(--foreground-color)
+    }
+  }
+
+  & > #options-container > #options-list {
+    & > #saving > ul > li {
+      &:not(:last-child) {
+        margin-bottom: .25rem;
+      }
+      & > button#deleteSave {
+        background-color: red;
       }
     }
+
+  }
+
+  & > #stats-container > #stats-list > li > #count-span {
+    float: right;
+    text-align: right;
+    padding-left: .25rem;
   }
 }
 

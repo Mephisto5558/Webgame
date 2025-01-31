@@ -1,7 +1,7 @@
 import { isButton } from '../utils/index.js';
 
 /** @type {import('.')['buyUpgrade']} */
-globalThis.buyUpgrade = function buyUpgrade(event) {
+export function buyUpgrade(event) {
   if (
     !isButton(event.target)
     || !shopItems[event.target.id].affordable
@@ -9,4 +9,4 @@ globalThis.buyUpgrade = function buyUpgrade(event) {
 
   clickCount -= shopItems[event.target.id].calc.getCost();
   shopItems[event.target.id].level++;
-};
+}
