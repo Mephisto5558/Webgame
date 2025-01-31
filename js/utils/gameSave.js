@@ -41,7 +41,7 @@ export async function deleteSave() {
 
 export async function importSave(event) {
   if (!event) await Swal.fire('User interaction required', 'Click ok to open the file selector', 'info');
-  createElement('input', { type: 'file', accept: '.save', onchange: async e => {
+  createElement('input', { type: 'file', accept: '.save', startIn: 'downloads', onchange: async e => {
     try { loadGame(atob(await e.target.files[0].text())); }
     catch (err) {
       void Swal.fire('Invalid File', `The selected file is not a valid save file.<br>${err.toString()}`, 'error');
