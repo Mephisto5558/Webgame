@@ -17,4 +17,8 @@ declare global {
   type statsListElem = HTMLUListElement;
 
   let clickCount: number;
+  type Stats = {
+    realClickCount: number;
+    hightestCPS: number;
+  };
 }

@@ -20,6 +20,6 @@ export function loadGame(): void;
 type SaveShopData = { id: ShopItem['id']; name: ShopItem['name']; level: ShopItem['level'] };
 type SaveData = {
   shopItems: Record<ShopItemIDs, SaveShopData>;
-  stats: { realClickCount: number };
+  stats: Stats;
   clickCount: number;
 };
