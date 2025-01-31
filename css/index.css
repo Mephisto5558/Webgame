@@ -110,7 +110,7 @@ header {
       top: 1.5rem;
       right: 0;
 
-      & > li > span {
+      & > li > #count-span {
         float: right;
         text-align: right;
         padding-left: .25rem;

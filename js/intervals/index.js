@@ -1,4 +1,4 @@
-import { cpsCountSpan } from '../constants.js';
+import { cpsCountSpan, statsListElem } from '../constants.js';
 import { saveGame } from '../utils/index.js';
 
 setInterval(() => {
@@ -14,3 +14,16 @@ setInterval(() => {
 }, 1000);
 
 setInterval(saveGame, 60_000);
+
+setInterval(() => {
+  if (!statsListElem.style.display) return; // Hidden by css
+
+  for (const [k, v] of Object.entries(stats)) {
+    /** @type {HTMLSpanElement} */
+    const elem = statsListElem.children.namedItem(k).children.namedItem('count-span');
+    if (elem.textContent == v) continue;
+
+    if (v == 0) elem.textContent &&= '';
+    else elem.textContent = v;
+  }
+}, 33); // around 30 times per second (aka 30FPS)
