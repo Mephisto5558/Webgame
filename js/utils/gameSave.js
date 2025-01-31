@@ -52,7 +52,7 @@ export async function importSave(event) {
 export function exportSave() {
   saveGame(); // update on localStorage
 
-  const url = URL.createObjectURL(new Blob([globalThis.localStorage.getItem('saveState')], { type: 'text/plain' }));
+  const url = URL.createObjectURL(new Blob([globalThis.localStorage.getItem('saveState')], { type: 'application/base64' }));
 
   createElement('a', { href: url, download: `webgame_${new Date().toISOString()}.save` }).click();
 
