@@ -8,12 +8,22 @@ import * as intervals from './intervals/index.js';
 import * as utils from './utils/index.js';
 /* eslint-enable sonarjs/no-wildcard-import */
 
+if (new URLSearchParams(globalThis.location.search).has('dev')) {
+  for (const file of [buttonEvents, intervals, shop, utils])
+    for (const [k, v] of Object.entries(file)) globalThis[k] = v;
+}
+
 loadGame();
 window.addEventListener('beforeunload', () => {
   if (!globalThis.noSaveOnExit) saveGame(); // set by deleteSave()
 });
 
-if (new URLSearchParams(globalThis.location.search).has('dev')) {
-  for (const file of [buttonEvents, intervals, shop, utils])
-    for (const [k, v] of Object.entries(file)) globalThis[k] = v;
-}
+const maxKeyPerSec = 90;
+let lastKeyEvent = 0;
+globalThis.addEventListener('keydown', e => {
+  if (e.key != 'Enter' || e.target?.nodeName != 'BUTTON') return;
+
+  const now = Date.now();
+  if (now - lastKeyEvent <= maxKeyPerSec) return e.preventDefault();
+  lastKeyEvent = now;
+});
