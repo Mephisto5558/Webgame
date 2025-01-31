@@ -6,10 +6,16 @@ setInterval(() => {
   if (clicks) clickCount += clicks;
 }, 1000);
 
-let oldClickCount = clickCount;
+let oldClickCount;
 setInterval(() => {
+  if (oldClickCount === undefined) { // Prevent milions of cps on game load
+    oldClickCount = clickCount;
+    return;
+  }
+
   const cps = clickCount - oldClickCount;
   if (cpsCountSpan.textContent != cps) cpsCountSpan.textContent = cps;
+  if (cps > stats.hightestCPS) stats.hightestCPS = cps;
   oldClickCount = clickCount;
 }, 1000);
 
