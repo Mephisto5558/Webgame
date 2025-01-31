@@ -21,7 +21,7 @@ Object.defineProperty(globalThis, 'clickCount', {
 
     for (const shopItem of Object.values(shopItems)) shopItem.refreshUseabilities();
 
-    currentCount.textContent = val;
+    currentCount.textContent = val.toLocaleString();
 
     const newFontSize = (1 + Math.min(val / 1000, val ^ 0.5) / (10_000 + Math.max(val ^ 0.5, 1))).toFixed(5);
     if (currentCount.style.fontSize.split('rem')[0] != newFontSize) currentCount.style.fontSize = `${newFontSize}rem`;

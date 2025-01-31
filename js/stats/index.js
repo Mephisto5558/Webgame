@@ -8,7 +8,7 @@ globalThis.stats = {
 
 for (const [k, v] of Object.entries(stats)) {
   createElement(
-    'span', { id: 'count-span', textContent: v },
+    'span', { id: 'count-span', textContent: v.toLocaleString() },
     createElement(
 
       // The regexes add spaces before uppercase letters and lowercase said letters. Does not match acronyms.

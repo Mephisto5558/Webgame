@@ -14,7 +14,10 @@ setInterval(() => {
   }
 
   const cps = clickCount - oldClickCount;
-  if (cpsCountSpan.textContent != cps) cpsCountSpan.textContent = cps;
+  if (cpsCountSpan.dataset.value != cps) {
+    cpsCountSpan.dataset.value = cps;
+    cpsCountSpan.textContent = cps.toLocaleString();
+  }
   if (cps > stats.hightestCPS) stats.hightestCPS = cps;
   oldClickCount = clickCount;
 }, 1000);
@@ -27,9 +30,15 @@ setInterval(() => {
   for (const [k, v] of Object.entries(stats)) {
     /** @type {HTMLSpanElement} */
     const elem = statsListElem.children.namedItem(k).children.namedItem('count-span');
-    if (elem.textContent == v) continue;
+    if (elem.dataset.value == v) continue;
 
-    if (v == 0) elem.textContent &&= '';
-    else elem.textContent = v;
+    if (v == 0) {
+      elem.dataset.value &&= 0;
+      elem.textContent &&= '';
+    }
+    else {
+      elem.dataset.value = v;
+      elem.textContent = v.toLocaleString();
+    }
   }
 }, 33); // around 30 times per second (aka 30FPS)

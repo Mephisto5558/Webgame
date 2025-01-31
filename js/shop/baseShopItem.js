@@ -19,7 +19,9 @@ export class BaseShopItem {
 
   set level(val) {
     this.#level = val;
-    this.levelOverviewSpan.textContent = val || ''; // 0 shall not be shown
+
+    this.levelOverviewSpan.dataset.value = val;
+    this.levelOverviewSpan.textContent = val ? val.toLocaleString() : ''; // 0 shall not be shown
   }
 
   get unlocked() {
@@ -56,16 +58,22 @@ export class BaseShopItem {
       const cost = this.calc.getCost();
       const increase = this.calc.getIncrease();
 
-      // strictly checking due to 0 == '';
-      if (Number.parseInt(costElem.textContent) !== cost) costElem.textContent = cost;
-      if (Number.parseInt(clicksElem.textContent) !== increase) clicksElem.textContent = increase;
+      if (costElem.dataset.value !== cost) {
+        costElem.dataset.value = cost;
+        costElem.textContent = cost.toLocaleString();
+      }
+      if (clicksElem.dataset.value !== increase) {
+        clicksElem.dataset.value = increase;
+        clicksElem.textContent = increase.toLocaleString();
+      }
     });
 
     this.levelOverviewSpan = createElement(
       'span',
-      { id: `level-${this.id}`, textContent: this.level || '' },
+      { id: `level-${this.id}`, textContent: this.level.toLocaleString() || '' },
       createElement('li', { id: this.id, textContent: this.name }, levelOverviewContainer)
     );
+    this.levelOverviewSpan.dataset.value = this.level;
 
     return this;
   }
