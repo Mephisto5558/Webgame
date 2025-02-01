@@ -60,8 +60,11 @@ export async function importSave(event) {
   createElement('input', { type: 'file', accept: '.save', startIn: 'downloads', onchange: async e => {
     try { loadGame(atob(await e.target.files[0].text())); }
     catch (err) {
-      void Swal.fire('Invalid File', `The selected file is not a valid save file.<br>${err.toString()}`, 'error');
+      return void Swal.fire('Invalid File', `The selected file is not a valid save file.<br>${err.toString()}`, 'error');
     }
+
+    globalThis.noSaveOnExit = true;
+    globalThis.location.reload();
   } }).click();
 }
 
