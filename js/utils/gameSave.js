@@ -26,7 +26,7 @@ export function loadGame(save = atob(globalThis.localStorage.getItem('saveState'
   for (const [k, data] of Object.entries(saveData)) {
     switch (k) {
       case 'clickCount': if (typeof data == 'number') globalThis[k] += data; break;
-      case 'stats': globalThis[k] = { ...globalThis[k], data }; break;
+      case 'stats': globalThis[k] = { ...globalThis[k], ...data }; break;
       case 'advancements': loadObjData(
         Object.fromEntries(Object.entries(data).toSorted((a, b) => a[1].unlockedTimestamp - b[1].unlockedTimestamp)),
         globalThis[k], e => e.unlocked && e.writeMessage()
