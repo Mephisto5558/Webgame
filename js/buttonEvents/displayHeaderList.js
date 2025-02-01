@@ -3,7 +3,7 @@ import { isButton } from '../utils/index.js';
 /** @type {NodeListOf<HTMLLIElement>} */
 const headerLists = document.querySelectorAll('header > [id$=container] > [id$=list]');
 
-/** @type {import('.')['displayHeaderList']} */
+/** @type {import('./index.js')['displayHeaderList']} */
 export function displayHeaderList(event) {
   if (!isButton(event.target)) return;
 

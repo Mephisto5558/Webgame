@@ -1,7 +1,7 @@
 import { createElement } from '../utils/index.js';
 import { shop } from '../constants.js';
 
-/** @typedef {import('.').BaseShopItem}T_BaseShopItem*/
+/** @typedef {import('./index.js').BaseShopItem}T_BaseShopItem*/
 
 /** @type {HTMLUListElement} */ const shopItemContainer = shop.querySelector('#shop-items > ul');
 /** @type {HTMLUListElement} */ const levelOverviewContainer = shop.querySelector('#level-overview > ul');

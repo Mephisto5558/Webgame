@@ -1,6 +1,6 @@
 import type Sweetalert2 from 'sweetalert2';
-import type { ShopItem, ShopItemIDs } from './shop';
-import type { Advancement, AdvancementIDs } from './advancements';
+import type { ShopItem, ShopItemIDs } from './shop/index.js';
+import type { Advancement, AdvancementIDs } from './advancements/index.js';
 
 declare global {
   // @ts-expect-error must be done this way to work

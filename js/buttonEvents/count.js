@@ -1,4 +1,4 @@
-/** @type {import('.')['count']} */
+/** @type {import('./index.js')['count']} */
 export function count() {
   stats.realClickCount++;
 

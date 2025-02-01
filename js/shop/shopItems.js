@@ -1,6 +1,6 @@
 import { BaseShopItem } from './baseShopItem.js';
 
-/** @typedef {import('.').ShopItem}T_ShopItem*/
+/** @typedef {import('./index.js').ShopItem}T_ShopItem*/
 
 
 export class ShopItem extends BaseShopItem {
@@ -8,7 +8,7 @@ export class ShopItem extends BaseShopItem {
    * @param {T_ShopItem['id']}id
    * @param {T_ShopItem['name']}name
    * @param {T_ShopItem['unlockCost']}unlockCost
-   * @param {import('.').CalcMethods | undefined}calcMethods */
+   * @param {import('./index.js').CalcMethods | undefined}calcMethods */
   constructor(id, name, unlockCost, calcMethods) {
     super(id, name, unlockCost);
 

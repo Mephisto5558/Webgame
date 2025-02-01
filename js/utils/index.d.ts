@@ -1,5 +1,5 @@
-import type { Advancement } from '../advancements';
-import type { ShopItem, ShopItemIDs } from '../shop';
+import type { Advancement } from '../advancements/index.js';
+import type { ShopItem, ShopItemIDs } from '../shop/index.js';
 
 export function isButton(element?: Element): element is HTMLButtonElement;
 

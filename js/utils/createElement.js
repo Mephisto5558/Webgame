@@ -1,5 +1,5 @@
 /**
- * @type {import('.')['createElement']}
+ * @type {import('./index.js')['createElement']}
  * @see {@link https://github.com/Mephisto5558/Website-Assets/blob/56f69a2711bd80348d81688f629fb3e7c767eb31/js/vote.js#L197 Source}*/
 export function createElement(tagName, data, parent, replace) {
   const element = document.createElement(tagName);

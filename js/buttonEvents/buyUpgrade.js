@@ -1,6 +1,6 @@
 import { isButton } from '../utils/index.js';
 
-/** @type {import('.')['buyUpgrade']} */
+/** @type {import('./index.js')['buyUpgrade']} */
 export function buyUpgrade(event) {
   if (
     !isButton(event.target)
