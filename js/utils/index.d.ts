@@ -1,3 +1,4 @@
+import type { Advancement } from '../advancements';
 import type { ShopItem, ShopItemIDs } from '../shop';
 
 export function isButton(element?: Element): element is HTMLButtonElement;
@@ -17,9 +18,18 @@ export function createElement<
 export function saveGame(): void;
 export function loadGame(): void;
 
-type SaveShopData = { id: ShopItem['id']; name: ShopItem['name']; level: ShopItem['level'] };
+type SaveShopData = { level: ShopItem['level'] };
+type SaveAdvancementData = { unlockedTimestamp: Advancement['unlockedTimestamp'] };
 type SaveData = {
   shopItems: Record<ShopItemIDs, SaveShopData>;
+  advancements: Record<Advancement['id'], SaveAdvancementData>;
   stats: Stats;
   clickCount: number;
 };
+
+declare function loadObjData<
+  TARGET extends Record<string, object>
+>(
+  sourceObj: Record<string, object>, targetObj: TARGET,
+  additionalFn?: (obj: TARGET[keyof TARGET]) => unknown
+): void;

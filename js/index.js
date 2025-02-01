@@ -1,4 +1,6 @@
 import './stats/index.js';
+import './advancements/index.js';
+
 import { saveGame, loadGame, isButton } from './utils/index.js';
 
 /* eslint-disable sonarjs/no-wildcard-import */
@@ -9,7 +11,7 @@ import * as utils from './utils/index.js';
 /* eslint-enable sonarjs/no-wildcard-import */
 
 if (new URLSearchParams(globalThis.location.search).has('dev')) {
-  for (const file of [intervals, shop, utils])
+  for (const file of [shop, intervals, utils])
     for (const [k, v] of Object.entries(file)) globalThis[k] = v;
 }
 

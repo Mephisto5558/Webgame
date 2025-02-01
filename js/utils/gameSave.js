@@ -1,8 +1,20 @@
 import { createElement } from './createElement.js';
 
+
+/** @type {import('.')['loadObjData']} */
+function loadObjData(sourceObj, targetObj, additionalFn) {
+  for (const [id, data] of Object.entries(sourceObj)) {
+    if (!(id in targetObj)) continue;
+
+    for (const [k, v] of Object.entries(data)) targetObj[id][k] = v;
+    additionalFn?.(targetObj[id]);
+  }
+}
+
+
 export function saveGame() {
   globalThis.localStorage.setItem('saveState', btoa(JSON.stringify({
-    shopItems, clickCount, stats
+    shopItems, stats, clickCount, advancements
   })));
 }
 
@@ -10,15 +22,16 @@ export function loadGame(save = atob(globalThis.localStorage.getItem('saveState'
   if (!save) return;
 
   /** @type {import('.').SaveData} */
-  const data = JSON.parse(save);
+  const saveData = JSON.parse(save);
+  for (const [k, data] of Object.entries(saveData)) {
+    switch (k) {
+      case 'clickCount': if (typeof data == 'number') globalThis[k] += data; break;
+      case 'stats': globalThis[k] = { ...globalThis[k], data }; break;
+      case 'advancements': loadObjData(data, globalThis[k], e => e.unlocked && e.writeMessage()); break;
+      case 'shopItems': loadObjData(data, globalThis[k], e => e.refreshUseabilities()); break;
 
-  globalThis.clickCount = data.clickCount;
-  globalThis.stats = { ...globalThis.stats, ...data.stats };
-
-  let /** @type {import('../shop').ShopItemIDs} */id, shopData;
-  for ([id, shopData] of Object.entries(data.shopItems)) {
-    for (const [k, v] of Object.entries(shopData)) shopItems[id][k] = v;
-    shopItems[id].refreshUseabilities();
+      default: loadObjData(data, globalThis[k]);
+    }
   }
 }
 

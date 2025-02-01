@@ -1,5 +1,7 @@
 /* #region page */
 :root {
+  scroll-behavior: smooth;
+
   --background-color: #5c5c5c;
   --background-color-secondary: #636363;
 
@@ -37,7 +39,7 @@ main {
 }
 
 footer {
-  flex: 0 1 40px;
+  flex: 0 1 3rem;
 }
 
 .swal2-popup,
@@ -126,6 +128,7 @@ header {
       &:not(:last-child) {
         margin-bottom: .25rem;
       }
+
       & > button#deleteSave {
         background-color: red;
       }
@@ -167,7 +170,7 @@ header {
   gap: 1rem;
 
   &:not(:has(#shop-items > ul > li > button.unlocked)) {
-    display: none;
+    visibility: hidden;
   }
 
   & > * {
@@ -200,7 +203,7 @@ header {
   background-color: green;
 
   &:not(.unlocked) {
-    display: none;
+    visibility: hidden;
   }
 
   &:not(.affordable) {
@@ -264,3 +267,30 @@ header {
 
 /* #endregion shop levels */
 /* #endregion shop */
+
+/* #region footer */
+footer {
+  max-height: 5rem;
+  border-top: 1px solid black;
+  padding-bottom: .25rem;
+  padding-left: .25rem;
+  overflow-y: auto;
+  scrollbar-color: black var(--background-color);
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  scroll-snap-type: y proximity;
+
+  &:not(:has(p)) {
+    visibility: hidden;
+  }
+
+  & > p {
+    margin: 0;
+
+    & > time {
+      font-weight: bold;
+    }
+  }
+}
+
+/* #endregion footer */

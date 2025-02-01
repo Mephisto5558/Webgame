@@ -25,6 +25,11 @@ setInterval(() => {
 setInterval(saveGame, 60_000);
 
 setInterval(() => {
+  for (const advancement of Object.values(advancements))
+    if (advancement.unlocked && !advancement.messageElement) advancement.writeMessage();
+}, 1000);
+
+setInterval(() => {
   if (!statsListElem.style.display) return; // Hidden by css
 
   for (const [k, v] of Object.entries(stats)) {

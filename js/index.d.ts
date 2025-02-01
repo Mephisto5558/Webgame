@@ -1,5 +1,6 @@
 import type Sweetalert2 from 'sweetalert2';
 import type { ShopItem, ShopItemIDs } from './shop';
+import type { Advancement, AdvancementIDs } from './advancements';
 
 declare global {
   // @ts-expect-error must be done this way to work
@@ -10,6 +11,7 @@ declare global {
   }
 
   type shopItems = { [ID in ShopItemIDs]: ShopItem<ID>; };
+  type advancements = { [ID in AdvancementIDs]: Advancement<ID> };
 
   type countContainer = HTMLDivElement;
   type cpsCountSpan = HTMLSpanElement;

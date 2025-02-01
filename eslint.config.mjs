@@ -16,7 +16,8 @@ export default [
         Swal: 'readable',
         clickCount: 'writeable',
         stats: 'readonly',
-        shopItems: 'readonly'
+        shopItems: 'readonly',
+        advancements: 'readonly'
       }
     },
     rules: {
