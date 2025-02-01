@@ -23,7 +23,7 @@ declare abstract class BaseShopItem<ID extends string = string, NAME extends str
   constructor(id: ID, name: NAME);
 
   /** Object with id, name and level */
-  toJSON(): string;
+  toJSON(): { level: BaseShopItem['level'] };
 }
 
 type CalcMethods = Record<string, ((this: ShopItem, ...args: unknown[]) => unknown)>;
