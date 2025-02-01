@@ -5,6 +5,9 @@ import globals from 'globals'
  * @type { import('eslint').Linter.Config[] }
  * This config lists all rules from every plugin it uses. */
 export default [
+  {
+    ignores: ['min/**']
+  },
   ...config,
   {
     name: 'overwrite',
