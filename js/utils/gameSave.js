@@ -1,7 +1,7 @@
 import { createElement } from './createElement.js';
 
 
-/** @type {import('.')['loadObjData']} */
+/** @type {import('./index.js')['loadObjData']} */
 function loadObjData(sourceObj, targetObj, additionalFn) {
   for (const [id, data] of Object.entries(sourceObj)) {
     if (!(id in targetObj)) continue;
@@ -21,13 +21,16 @@ export function saveGame() {
 export function loadGame(save = atob(globalThis.localStorage.getItem('saveState') ?? '')) {
   if (!save) return;
 
-  /** @type {import('.').SaveData} */
+  /** @type {import('./index.js').SaveData} */
   const saveData = JSON.parse(save);
   for (const [k, data] of Object.entries(saveData)) {
     switch (k) {
       case 'clickCount': if (typeof data == 'number') globalThis[k] += data; break;
       case 'stats': globalThis[k] = { ...globalThis[k], data }; break;
-      case 'advancements': loadObjData(data, globalThis[k], e => e.unlocked && e.writeMessage()); break;
+      case 'advancements': loadObjData(
+        Object.fromEntries(Object.entries(data).toSorted((a, b) => a[1].unlockedTimestamp - b[1].unlockedTimestamp)),
+        globalThis[k], e => e.unlocked && e.writeMessage()
+      ); break;
       case 'shopItems': loadObjData(data, globalThis[k], e => e.refreshUseabilities()); break;
 
       default: loadObjData(data, globalThis[k]);

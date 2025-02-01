@@ -1,7 +1,7 @@
 export class Advancement<
   ID extends string = string,
   ULCondition extends () => boolean = () => boolean,
-  TextBox extends HTMLElement = HTMLElement
+  TextBox extends HTMLElement = HTMLDivElement
 > {
   id: ID;
   message: string;

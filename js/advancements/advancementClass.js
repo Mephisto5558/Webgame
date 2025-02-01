@@ -1,6 +1,6 @@
 import { createElement } from '../utils/index.js';
 
-/** @typedef {import('.').Advancement}T_Advancement*/
+/** @typedef {import('./index.js').Advancement}T_Advancement*/
 
 export class Advancement {
   id; message; unlockCondition; textBox;
@@ -44,7 +44,7 @@ export class Advancement {
    * @param {T_Advancement['unlockCondition']}unlockCondition
    * @param {T_Advancement['textBox']}textBox
    */
-  constructor(id, message, unlockCondition, textBox = document.querySelector('footer')) {
+  constructor(id, message, unlockCondition, textBox = document.querySelector('footer > #message-box')) {
     this.id = id;
     this.message = message;
     this.unlockCondition = unlockCondition.bind(this);
