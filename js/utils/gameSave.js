@@ -29,7 +29,7 @@ export function loadGame(save = atob(globalThis.localStorage.getItem('saveState'
       case 'stats': globalThis[k] = { ...globalThis[k], ...data }; break;
       case 'advancements': loadObjData(
         Object.fromEntries(Object.entries(data).toSorted((a, b) => a[1].unlockedTimestamp - b[1].unlockedTimestamp)),
-        globalThis[k], e => e.unlocked && e.writeMessage()
+        globalThis[k], e => Boolean(e.unlockedTimestamp) && e.writeMessage()
       ); break;
       case 'shopItems': loadObjData(data, globalThis[k], e => e.refreshUseabilities()); break;
 
