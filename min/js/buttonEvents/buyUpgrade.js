@@ -1,0 +1,1 @@
+import{isButton}from"../utils/index.js";function buyUpgrade(t){isButton(t.target)&&shopItems[t.target.id].affordable&&(clickCount-=shopItems[t.target.id].calc.getCost(),shopItems[t.target.id].level++)}export{buyUpgrade};

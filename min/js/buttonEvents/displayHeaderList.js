@@ -1,0 +1,1 @@
+import{isButton}from"../utils/index.js";let headerLists=document.querySelectorAll("header > [id$=container] > [id$=list]");function displayHeaderList(t){if(isButton(t.target))for(var e of headerLists)e.style.display=e.id?.startsWith(t.target.id.split("-")[0])&&!e.style.display?"unset":""}export{displayHeaderList};

@@ -1,0 +1,1 @@
+function count(){stats.realClickCount++;var c=shopItems.clickPerClick.calc.getIncrease();clickCount+=c}export{count};

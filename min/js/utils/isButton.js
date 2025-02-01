@@ -1,0 +1,1 @@
+let isButton=t=>"BUTTON"==t?.nodeName;export{isButton};
