@@ -21,4 +21,4 @@ export class Advancement<
   ToJSON(): { unlockedTimestamp: Advancement['unlockedTimestamp'] };
 }
 
-export type AdvancementIDs = '1Click' | 'firstUpgrade' | '100Clicks' | '1000Clicks';
+export type AdvancementIDs = '1Click' | 'firstUpgrade' | '100Clicks' | '1TClicks' | '100TClicks' | '1MClicks' | '10PassiveCPS' | 'HighActiveCPS';
