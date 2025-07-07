@@ -1,14 +1,14 @@
 Object.defineProperty(NodeList.prototype, 'namedItem', {
-  /* eslint-disable-next-line unicorn/no-null -- same as HTMLCollection#namedItem*/
+  /* eslint-disable-next-line unicorn/no-null -- same as HTMLCollection#namedItem */
   value: function (name) { return [...this].find(e => e.id == name || e.name == name) ?? null; }
 });
 
 export const
-  /** @type {countContainer} */countContainer = document.querySelector('#count-container'),
-  /** @type {cpsCountSpan} */cpsCountSpan = countContainer.querySelector('#cps-count-msg > span'),
-  /** @type {shop} */shop = document.querySelector('#shop'),
-  /** @type {NodeListOf<import('./shop').ShopItem['levelOverviewSpan']>} */shopLevelContainer = shop.querySelectorAll('#level-overview > ul > li > span'),
-  /** @type {statsListElem}*/ statsListElem = document.querySelector('header > #stats-container > #stats-list');
+  /** @type {countContainer} */ countContainer = document.querySelector('#count-container'),
+  /** @type {cpsCountSpan} */ cpsCountSpan = countContainer.querySelector('#cps-count-msg > span'),
+  /** @type {shop} */ shop = document.querySelector('#shop'),
+  /** @type {NodeListOf<import('./shop').ShopItem['levelOverviewSpan']>} */ shopLevelContainer = shop.querySelectorAll('#level-overview > ul > li > span'),
+  /** @type {statsListElem} */ statsListElem = document.querySelector('header > #stats-container > #stats-list');
 
 
 /** @type {HTMLSpanElement} */ const currentCount = countContainer.querySelector('#count-msg > span');

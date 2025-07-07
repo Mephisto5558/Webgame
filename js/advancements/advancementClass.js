@@ -1,11 +1,11 @@
 import { createElement } from '../utils/index.js';
 
-/** @typedef {import('./index.js').Advancement}T_Advancement*/
+/** @typedef {import('./index.js').Advancement} T_Advancement */
 
 export class Advancement {
   id; message; unlockCondition; textBox;
   unlockedTimestamp;
-  /** @type {T_Advancement['messageElement']}*/ messageElement;
+  /** @type {T_Advancement['messageElement']} */ messageElement;
 
   get unlocked() {
     if (this.unlockCondition()) {
@@ -39,10 +39,10 @@ export class Advancement {
   }
 
   /**
-   * @param {T_Advancement['id']}id
-   * @param {T_Advancement['message']}message
-   * @param {T_Advancement['unlockCondition']}unlockCondition
-   * @param {T_Advancement['textBox']}textBox
+   * @param {T_Advancement['id']} id
+   * @param {T_Advancement['message']} message
+   * @param {T_Advancement['unlockCondition']} unlockCondition
+   * @param {T_Advancement['textBox']} textBox
    */
   constructor(id, message, unlockCondition, textBox = document.querySelector('footer > #message-box')) {
     this.id = id;

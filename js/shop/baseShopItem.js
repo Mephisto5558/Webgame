@@ -1,7 +1,7 @@
 import { createElement } from '../utils/index.js';
 import { shop } from '../constants.js';
 
-/** @typedef {import('./index.js').BaseShopItem}T_BaseShopItem*/
+/** @typedef {import('./index.js').BaseShopItem} T_BaseShopItem */
 
 /** @type {HTMLUListElement} */ const shopItemContainer = shop.querySelector('#shop-items > ul');
 /** @type {HTMLUListElement} */ const levelOverviewContainer = shop.querySelector('#level-overview > ul');
@@ -9,8 +9,8 @@ import { shop } from '../constants.js';
 export class BaseShopItem {
   id; name;
   unlockCost = 0;
-  /** @type {T_BaseShopItem['levelOverviewSpan']}*/ levelOverviewSpan;
-  /** @type {T_BaseShopItem['levelUpButton']}*/ levelUpButton;
+  /** @type {T_BaseShopItem['levelOverviewSpan']} */ levelOverviewSpan;
+  /** @type {T_BaseShopItem['levelUpButton']} */ levelUpButton;
   #level = 0;
 
   get level() {
@@ -89,9 +89,9 @@ export class BaseShopItem {
   }
 
   /**
-   * @param {T_BaseShopItem['id']}id
-   * @param {T_BaseShopItem['name']}name
-   * @param {T_BaseShopItem['unlockCost']}unlockCost */
+   * @param {T_BaseShopItem['id']} id
+   * @param {T_BaseShopItem['name']} name
+   * @param {T_BaseShopItem['unlockCost']} unlockCost */
   constructor(id, name, unlockCost = 0) {
     this.id = id;
     this.name = name;
