@@ -1,6 +1,9 @@
 name: Minify on Push
 on: push
 
+permissions:
+  contents: write
+
 jobs:
   call-minify-workflow:
     uses: Mephisto5558/Mephisto5558/.github/workflows/auto-minify.yml@main
