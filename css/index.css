@@ -15,7 +15,7 @@
 
 html,
 body {
-  height: 100%;
+  block-size: 100%;
   display: flex;
   flex-flow: column;
   background-color: var(--background-color);
@@ -45,7 +45,7 @@ footer {
 .swal2-popup,
 .swal2-title {
   color: var(--foreground-color) !important;
-  text-align: center
+  text-align: center;
 }
 
 /* #endregion page */
@@ -55,12 +55,13 @@ footer {
 button {
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
   border: 0;
   border-radius: 5px;
   padding: 5px 10px;
 
   &:hover {
-    filter: brightness(85%)
+    filter: brightness(85%);
   }
 
   & > i {
@@ -90,7 +91,7 @@ header {
   display: flex;
   justify-content: space-between;
   background-color: var(--background-color-secondary);
-  border-bottom: black solid 1px;
+  border-block-end: black solid 1px;
   gap: .5rem;
   margin: 0 0 0.5rem 0;
   padding: 0.25rem 0.5rem 0 0;
@@ -106,7 +107,7 @@ header {
   }
 
   & > :first-child {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   & > div[id$='container'] > [id$='list'] {
@@ -115,18 +116,18 @@ header {
     background-color: color-mix(in srgb, var(--background-color) 80%, transparent);
     padding: 0 .25rem;
     border-radius: 5px;
-    top: 1.5rem;
-    right: 0;
+    inset-block-start: 1.5rem;
+    inset-inline-end: 0;
 
     & button {
-      background-color: var(--foreground-color)
+      background-color: var(--foreground-color);
     }
   }
 
   & > #options-container > #options-list {
     & > #saving > ul > li {
       &:not(:last-child) {
-        margin-bottom: .25rem;
+        margin-block-end: .25rem;
       }
 
       & > button#deleteSave {
@@ -137,9 +138,9 @@ header {
   }
 
   & > #stats-container > #stats-list > li > #count-span {
-    float: right;
-    text-align: right;
-    padding-left: .25rem;
+    float: inline-end;
+    text-align: end;
+    padding-inline-start: .25rem;
   }
 }
 
@@ -151,10 +152,11 @@ header {
 }
 
 #count-container {
-  width: 100%;
+  inline-size: 100%;
   align-content: center;
   text-align: center;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 /* #endregion main counter */
@@ -180,7 +182,7 @@ header {
     gap: 0.5rem;
 
     & > h1 {
-      margin-top: 0;
+      margin-block-start: 0;
     }
 
     & > ul > li {
@@ -196,7 +198,7 @@ header {
 
 /* #region shop items */
 #shop-items {
-  border-right: 1px solid black;
+  border-inline-end: 1px solid black;
 }
 
 #shop-items > ul > li > button {
@@ -231,9 +233,9 @@ header {
       margin: 0;
 
       & > span {
-        text-align: right;
+        text-align: end;
         font-size: inherit;
-        float: right;
+        float: inline-end;
       }
     }
   }
@@ -243,14 +245,14 @@ header {
 
 /* #region shop levels */
 #level-overview {
-  border-left: 1px solid black;
+  border-inline-start: 1px solid black;
 
   &:not(:has(ul > li > span:not(:empty))) {
     display: none;
   }
 
   & > h1 {
-    text-align: right;
+    text-align: end;
   }
 
   & > ul > li {
@@ -259,8 +261,8 @@ header {
     }
 
     & > span {
-      text-align: right;
-      min-width: 2rem;
+      text-align: end;
+      min-inline-size: 2rem;
     }
   }
 }
@@ -270,19 +272,23 @@ header {
 
 /* #region footer */
 footer {
-  max-height: 20%;
-  border-top: 1px solid black;
-  padding-bottom: .25rem;
-  padding-left: .25rem;
-  overflow-y: hidden;
-  
+  max-block-size: 20%;
+  border-block-start: 1px solid black;
+  padding-block-end: .25rem;
+  padding-inline-start: .25rem;
+  overflow-block: hidden;
+
   & > #message-box {
-    overflow-y: auto;
+    overflow-block: auto;
     scrollbar-color: black var(--background-color);
     scrollbar-width: thin;
     scrollbar-gutter: stable;
     scroll-snap-type: y mandatory;
-    height: 100%;
+    block-size: 100%;
+
+    &::-webkit-scrollbar {
+      color: black var(--background-color);
+    }
 
     &:not(:has(p)) {
       visibility: hidden;
