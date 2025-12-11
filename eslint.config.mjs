@@ -1,4 +1,4 @@
-import config from '@mephisto5558/eslint-config';
+import config, {tsGlob, jsGlob} from '@mephisto5558/eslint-config';
 import globals from 'globals'
 
 /**
@@ -11,7 +11,7 @@ export default [
   ...config,
   {
     name: 'overwrite',
-    files: ['**/*.js', '**/*.html'],
+    files: [`**/*${tsGlob}`, `**/*${jsGlob}`,'**/*.html'],
     languageOptions: {
       globals: {
         ...globals.es2024,
