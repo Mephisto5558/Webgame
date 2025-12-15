@@ -15,7 +15,7 @@
     "@mephisto5558/eslint-config": "latest",
     "better-typescript-lib": "^2.11.0",
     "globals": "latest",
-    "sweetalert2": "11.26.4"
+    "sweetalert2": "11.26.10"
   },
   "repository": {
     "type": "git",
