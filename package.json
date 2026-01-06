@@ -12,6 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@mephisto5558/better-types": "latest",
     "@mephisto5558/eslint-config": "latest",
     "better-typescript-lib": "^2.11.0",
     "globals": "latest",

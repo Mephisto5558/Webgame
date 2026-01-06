@@ -1,3 +1,5 @@
+import type * as __ from '@mephisto5558/better-types'; /* eslint-disable-line import-x/no-namespace -- load in global definitions */
+
 import type Sweetalert2 from 'sweetalert2';
 import type { ShopItem, ShopItemIDs } from './shop/index.js';
 import type { Advancement, AdvancementIDs } from './advancements/index.js';
